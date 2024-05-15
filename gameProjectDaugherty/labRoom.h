@@ -2,10 +2,10 @@
 //CIS 1140 Game Project
 //May 14 2024
 #pragma once
-#ifndef TEACHER_H
-#define TEACHER_H
+#ifndef LAB_H
+#define LAB_H
 
 
 
 
-#endif TEACHER_H
+#endif LAB_H
