@@ -10,11 +10,11 @@
 #include <string>
 using namespace std;
 
-class Teacher : public Character{
+class Teacher : public Character {
 private:
 public:
 	Teacher(string name, int health, string weapon);
-}
+};
 
 
 #endif TEACHER_H

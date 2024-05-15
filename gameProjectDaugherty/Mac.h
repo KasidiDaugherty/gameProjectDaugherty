@@ -14,7 +14,7 @@ using namespace std;
 class Mac : public Room {
 private:
 public:
-	Library();
+	Mac();
 	void enterRoom() override;
 };
 
