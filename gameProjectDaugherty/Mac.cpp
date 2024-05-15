@@ -10,7 +10,6 @@ using namespace std;
 
 Mac ::Mac() : Room("Mac", "You are in the Mac, The room smells like buring chicken and the tables are all scattered") {}
 
-
 void Mac::enterRoom() {
 	cout << endl << name << endl;
 	cout << info << endl;

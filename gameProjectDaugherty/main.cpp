@@ -3,7 +3,7 @@
 //May 14 2024
 
 #include <iostream>
-#include <cstdlib>
+#include <random>
 #include "LabRoom.h"
 #include "Hallway.h"
 #include "Mac.h"
@@ -13,6 +13,8 @@
 void intro();
 void battle(Character& user, Character& enemy);
 int getDamage(string& weapon);
+void displayOptions();
+void displayBattleOptions();
 
 int main() {
 	LabRoom lab;
@@ -27,31 +29,47 @@ int main() {
 
 	intro();
 
-	for (int i = 0; i < 3; i++) {
-		Room& currentRoom = *rooms[i];
+
+	int currentRoomIndex = 0;
+
+	while (student.alive() && currentRoomIndex < 3) {
+		currentRoomIndex++;
+		Room& currentRoom = *rooms[currentRoomIndex];
 		currentRoom.enterRoom();
 
-		if (i == 0) {
-			cout << "Uh Oh! " << goodall.name << " is coming!" << endl;
-			battle(student, goodall);
-		}
-		else if (i == 1) {
-			cout << "Oh No! " << underwood.name << "is heading towards you!" << endl;
-			battle(student, underwood);
-		}
-		else {
-			cout << "Not Again! " << goodall.name << " is running right at you!" << endl;
-			battle(student, goodall);
-		}
+		displayOptions();
+		int choice;
+		cin >> choice;
 
-		if (!student.alive()) {
-			
-			cout << "You have been defeated by the evil teachers... " << "Game over!";
-			cin.get();
-			cin.ignore();
-			return 0;
-		}
+		switch (choice) {
+			case 1:
+				cout << "You decided to stay in the room." << endl;
+				cout << "Uh Oh! " << goodall.name << " was hiding in this room!" << endl;
+				battle(student, goodall);
+				break;
+			case 2:
+				cout << "You chose to go to the next room";
+				currentRoomIndex++;
+				
+			case 3:
+				if (currentRoomIndex == 0) {
+					cout << "Oh No! " << underwood.name << " is heading towards you!" << endl;
+					battle(student, underwood);
+				}
+				else {
+					cout << "Not Again! " << goodall.name << " is running right at you!" << endl;
+					battle(student, goodall);
+				}
 
+				if (!student.alive()) {
+
+					cout << "You have been defeated by the evil teachers... " << "Game over!";
+					cin.get();
+					cin.ignore();
+					return 0;
+				}
+
+		}
 	}
 
 	cout << "Congratulations! You have escaped the school safely!" << endl;
@@ -69,10 +87,42 @@ void intro()
 
 void battle(Character& user, Character& enemy)
 {
+
+	displayBattleOptions();
+
+	int potion = 1;
+	int choice;
+	cin >> choice;
+
+	switch (choice) {
+		case 1:
+			cout << user.name << " attacks " << enemy.name << " with a " << user.weapon << "!" << endl;
+			enemy.takeDamage(user.damage);
+			cout << enemy.name << "'s health is now " << enemy.health << endl;
+		case 2:
+			cout << user.name << " is defending the next attack" << endl;
+			user.takeDamage(enemy.damage / 2);
+			cout << user.name << "'s health is now " << user.health << endl;
+		case 3:
+			if (potion > 0){
+				cout << user.name << " decides to use the secret potion!" << endl;
+				const int MIN = 1;
+				const int MAX = 25;
+				random_device engine;
+				std::random_device rand_dev;
+				std::mt19937 generator(rand_dev());
+				std::uniform_int_distribution<int> dist(MIN, MAX);
+				int potionHealth = random(generator); //fix 
+				cout << "The potion restored " << potionHealth << "health!" << endl;
+				potion--;
+			}
+			else {
+				cout << "You already used your potion.. you lose a turn" << endl;
+			}
+	}
+
 	while (user.alive() && enemy.alive()) {
-		cout << user.name << " attacks " << enemy.name << " with a " << user.weapon << "!" << endl;
-		enemy.takeDamage(user.damage);
-		cout << enemy.name << "'s health is now " << enemy.health << endl;
+		
 
 		if (enemy.alive()) {
 			cout << enemy.name << " attacks " << user.name << " with a " << enemy.weapon << "!" << endl;
@@ -105,3 +155,17 @@ int getDamage(string& weapon)
 
 	return 1;
 }
+
+void displayOptions()
+{
+	cout << "Now its time for you to make a choice... What will you do?" << endl;
+	cout << "1. Stay in the room" << endl << "2. Confront the teacher" << endl << "Choice: ";
+}
+
+void displayBattleOptions() {
+	cout << "Now it is your turn in the battle.." << endl;
+	cout << "Choose your next move: " << endl;
+	cout << "1. Attack the Teacher " << endl << "2. Defend against the enemies attack" << endl << "3. Use a secret ONE time use potion" << endl;
+	cout << "Choice: ";
+}
+
