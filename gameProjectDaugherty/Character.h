@@ -11,14 +11,14 @@ using namespace std;
 
 class Character {
 private:
+public:
 	string name;
 	int health;
 	string weapon;
 	int damage;
-public:
 	Character(string name, int health, string weapon);
 
-	void damage(int damage);
+	void takeDamage(int damage);
 	bool alive();
 	
 };

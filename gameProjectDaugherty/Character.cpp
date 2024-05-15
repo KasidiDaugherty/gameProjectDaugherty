@@ -10,7 +10,7 @@ using namespace std;
 
 Character ::Character(string name, int health, string weapon) : name(name), health(health), weapon(weapon) {}
 
-void Character::damage(int damage) {
+void Character::takeDamage(int damage) {
 	health -= damage;
 	if (health < 0) {
 		health = 0;
