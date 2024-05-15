@@ -42,16 +42,18 @@ int main() {
 		cin >> choice;
 
 		switch (choice) {
-			case 1:
+			case 1: {
 				cout << "You decided to stay in the room." << endl;
 				cout << "Uh Oh! " << goodall.name << " was hiding in this room!" << endl;
 				battle(student, goodall);
 				break;
-			case 2:
-				cout << "You chose to go to the next room";
+			}
+			case 2: {
+				cout << "You chose to go to the next room" << endl;
 				currentRoomIndex++;
-				
-			case 3:
+				break;
+			}
+			case 3: {
 				if (currentRoomIndex == 0) {
 					cout << "Oh No! " << underwood.name << " is heading towards you!" << endl;
 					battle(student, underwood);
@@ -68,7 +70,8 @@ int main() {
 					cin.ignore();
 					return 0;
 				}
-
+				break;
+			}
 		}
 	}
 
@@ -95,30 +98,37 @@ void battle(Character& user, Character& enemy)
 	cin >> choice;
 
 	switch (choice) {
-		case 1:
+		case 1: {
 			cout << user.name << " attacks " << enemy.name << " with a " << user.weapon << "!" << endl;
 			enemy.takeDamage(user.damage);
 			cout << enemy.name << "'s health is now " << enemy.health << endl;
-		case 2:
+			break;
+		}
+		case 2: {
 			cout << user.name << " is defending the next attack" << endl;
 			user.takeDamage(enemy.damage / 2);
 			cout << user.name << "'s health is now " << user.health << endl;
-		case 3:
-			if (potion > 0){
+			break;
+		}
+		case 3: {
+			if (potion > 0) {
 				cout << user.name << " decides to use the secret potion!" << endl;
 				const int MIN = 1;
 				const int MAX = 25;
 				random_device engine;
 				std::random_device rand_dev;
 				std::mt19937 generator(rand_dev());
-				std::uniform_int_distribution<int> dist(MIN, MAX);
+				std::uniform_int_distribution<int> random(MIN, MAX);
 				int potionHealth = random(generator); //fix 
 				cout << "The potion restored " << potionHealth << "health!" << endl;
 				potion--;
 			}
+
 			else {
 				cout << "You already used your potion.. you lose a turn" << endl;
 			}
+			break;
+		}
 	}
 
 	while (user.alive() && enemy.alive()) {
@@ -159,7 +169,7 @@ int getDamage(string& weapon)
 void displayOptions()
 {
 	cout << "Now its time for you to make a choice... What will you do?" << endl;
-	cout << "1. Stay in the room" << endl << "2. Confront the teacher" << endl << "Choice: ";
+	cout << "1. Stay in the room" << endl << "2. Go to the next room" << endl << "3. Confront the teacher" << endl << "Choice: ";
 }
 
 void displayBattleOptions() {

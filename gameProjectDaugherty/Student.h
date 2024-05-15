@@ -11,7 +11,6 @@ class Student : public Character {
 private:
 public:
 	Student();
-
 };
 
 
