@@ -5,7 +5,17 @@
 #ifndef MAC_H
 #define MAC_H
 
+#include "Room.h"
+#include <iostream>
+#include <string>
 
+using namespace std;
 
+class Mac : public Room {
+private:
+public:
+	Library();
+	void enterRoom() override;
+};
 
 #endif MAC_H

@@ -5,6 +5,21 @@
 #ifndef ROOM_H
 #define ROOM_H
 
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+class Room {
+private:
+public:
+	string name;
+	string info;
+
+	Room(string name, string info);
+	virtual void enterRoom() = 0;
+};
+
 
 
 

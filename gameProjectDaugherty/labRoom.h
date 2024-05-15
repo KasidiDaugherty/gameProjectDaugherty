@@ -4,7 +4,17 @@
 #pragma once
 #ifndef LAB_H
 #define LAB_H
+#include "Room.h"
+#include <iostream>
+#include <string>
+using namespace std;
 
+class LabRoom : public Room {
+private:
+public:
+	LabRoom();
+	void enterRoom() override;
+};
 
 
 

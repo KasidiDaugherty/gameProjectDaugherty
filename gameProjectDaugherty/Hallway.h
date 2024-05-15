@@ -5,7 +5,17 @@
 #ifndef HALLWAY_H
 #define HALLWAY_H
 
+#include "Room.h"
+#include <iostream>
+#include <string>
 
+using namespace std;
 
+class Hallway : public Room {
+private:
+public:
+	Hallway();
+	void enterRoom() override;
+};
 
 #endif HALLWAY_H
