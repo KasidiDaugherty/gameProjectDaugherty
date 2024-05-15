@@ -7,12 +7,13 @@
 
 #include "Character.h"
 #include <iostream>
-#inlcude <string>
+#include <string>
 using namespace std;
 
-Class Teacher : public Character{
+class Teacher : public Character{
 private:
 public:
+	Teacher(string name, int health, string weapon);
 }
 
 
